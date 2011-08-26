@@ -4,12 +4,14 @@ require 'json'
 
 class MyApp
 
-  def initialize(window)
+  def initialize(window, thash)
     #EM::connect ...
     @window = window
     window_signals
     build_ui
     @window.show_all
+    
+    thash.burp
   end
   
   def label_text=(text)
@@ -34,25 +36,29 @@ end
 
 module Thash
   def post_init
-    puts "post init UDP"
+    puts "Connected to telehash.org"
   end
   
   def receive_data(data)
     json = JSON.parse(data)
     puts "#{json.inspect}"
+    @my_address = json["_to"]
+  end
+
+  def burp
+    send_datagram '{"+end":"a9993e364706816aba3e25717850c26c9cd0d89d"}', "telehash.org", 42424
   end
 end
 
 EM::run do
+  thash = EventMachine::open_datagram_socket "0.0.0.0", 0, Thash
+
   window = Gtk::Window.new
-  client = MyApp.new(window)
+  client = MyApp.new(window, thash)
   
   EventMachine::PeriodicTimer.new(1) do
     client.label_text = Time.now.to_s
   end
-  
-  thash = EventMachine::open_datagram_socket "0.0.0.0", 0, Thash
-  thash.send_datagram '{"+end":"3b6a6..."}', "telehash.org", 42424
   
   give_tick = proc { Gtk::main_iteration; EM.next_tick(give_tick); }
   give_tick.call
