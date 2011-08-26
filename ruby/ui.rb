@@ -19,10 +19,7 @@ class MyApp
   private
   
   def window_signals
-    @window.signal_connect("destroy") do
-      puts "destroy event occurred"
-      Gtk.main_quit
-    end
+    @window.signal_connect("destroy") { EventMachine::stop_event_loop }
   end
   
   def build_ui
