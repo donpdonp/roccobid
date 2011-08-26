@@ -1,0 +1,27 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    atk (1.0.0)
+      glib2 (>= 1.0.0)
+    cairo (1.10.0)
+      pkg-config
+    eventmachine (0.12.10)
+    gdk_pixbuf2 (1.0.0)
+      glib2 (>= 1.0.0)
+    glib2 (1.0.0)
+      pkg-config
+    gtk2 (1.0.0)
+      atk (>= 1.0.0)
+      gdk_pixbuf2 (>= 1.0.0)
+      pango (>= 1.0.0)
+    pango (1.0.0)
+      cairo (>= 1.10.0)
+      glib2 (>= 1.0.0)
+    pkg-config (1.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  eventmachine
+  gtk2
