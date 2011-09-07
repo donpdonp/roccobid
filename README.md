@@ -9,7 +9,7 @@ An exchange can be broken into two parts.
 
 There are advantages to breaking up this functionality into seperate
 services because they have very different properties. This project focuses
-on the bid/ask offer database. See [[https://github.com/donpdonp/smallest-escrow]]
+on the bid/ask offer database. See https://github.com/donpdonp/smallest-escrow
 for an escrow service.
 
 A traditional exchange with a central offers database allows for consistency
